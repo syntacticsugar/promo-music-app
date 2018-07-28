@@ -38,8 +38,15 @@ body
 .App-intro
   font-size large
 
-@keyframes App-logo-spin
-  from
-    transform rotate(0deg)
-  to
-    transform rotate(360deg)
+.alphabet-menu-wrapper
+  ul
+    font-family "roboto slab"
+    color alphabetLetter
+    font-size 1.8em
+    list-style-type none
+    li
+      margin-right 1em
+      display inline
+      &:hover
+        cursor pointer
+        color lighten(alphabetLetter,15)
