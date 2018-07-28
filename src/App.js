@@ -3,11 +3,23 @@ import logo from './logo.svg';
 import AlphabetMenu from './AlphabetMenu';
 
 class App extends Component {
+  state = {
+          activeLetter: "",
+  }
+  selectLetter = (letter) => {
+    const activeLetter = letter;
+    this.setState({
+      activeLetter: activeLetter
+    });
+  }
   render() {
     return (
       <React.Fragment>
-        <Header />
-        <AlphabetMenu />
+        <div className="container">
+          <Header />
+          <AlphabetMenu selectLetter={this.selectLetter} />
+          <h1> {this.state.activeLetter}</h1>
+        </div>
       </React.Fragment>
     )
   }
@@ -22,7 +34,6 @@ class Header extends Component {
           <h1 className="App-title">For Promotional Use Only</h1>
           <div className='slogan'>Classic Rave Music from the 90s and Beyond</div>
         </header>
-        <Row />
       </div>
     );
   }
