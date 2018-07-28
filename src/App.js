@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import AlphabetMenu from './AlphabetMenu';
 
 class App extends Component {
@@ -39,6 +38,7 @@ class Header extends Component {
   }
 }
 
+/*
 class Row extends Component {
   render() {
     return (
@@ -56,4 +56,5 @@ class Row extends Component {
     )
   }
 }
+*/
 export default App;
