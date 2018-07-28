@@ -27,9 +27,13 @@ class AlphabetMenu extends Component {
         <div className="alphabet-menu-wrapper">
             <div className="horizontal-line"></div>
             <div className="horizontal-line"></div>
-            <ul>
-              { alphabetConst.map((letter) => this.createLetter(letter) ) }
-            </ul>
+
+            <div className="horizontal-scroller">
+              <ul>
+                { alphabetConst.map((letter) => this.createLetter(letter) ) }
+              </ul>
+            </div>
+            
             <div className="horizontal-line"></div>
             <div className="horizontal-line"></div>
         </div>
