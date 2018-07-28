@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import AlphabetMenu from './AlphabetMenu';
 import './App.css';
 
 class App extends Component {
@@ -8,16 +9,6 @@ class App extends Component {
       <React.Fragment>
         <Header />
         <AlphabetMenu />
-      </React.Fragment>
-    )
-  }
-}
-
-class AlphabetMenu extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        <div className="alphabet-menu-wrapper">A B C D E F G</div>
       </React.Fragment>
     )
   }
