@@ -1,3 +1,5 @@
+# CSS Output files (redundant)
+/public/static/css/*
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 *.sw*
 
