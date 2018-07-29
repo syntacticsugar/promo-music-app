@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import AlphabetMenu from './AlphabetMenu';
+import Songs from './Songs';
 
 class App extends Component {
   state = {
           activeLetter: "",
           songList: []
-
   }
   selectLetter = (letter) => {
     const activeLetter = letter;
@@ -24,20 +24,13 @@ class App extends Component {
 
   }
 
-  renderSong(song, index) {
-    return <li key={'song-' + index} >{song}</li>
-  }
-
   render() {
     return (
       <React.Fragment>
         <div className="container">
           <Header />
           <AlphabetMenu selectLetter={this.selectLetter} />
-          <h1> {this.state.activeLetter}</h1>
-          <ul>
-            {this.state.songList.map(this.renderSong)}
-          </ul>
+          <Songs songList={this.state.songList} />
         </div>
       </React.Fragment>
     )
