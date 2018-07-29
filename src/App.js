@@ -4,13 +4,30 @@ import AlphabetMenu from './AlphabetMenu';
 class App extends Component {
   state = {
           activeLetter: "",
+          songList: []
+
   }
   selectLetter = (letter) => {
     const activeLetter = letter;
-    this.setState({
-      activeLetter: activeLetter
-    });
+
+    fetch(`./json/${letter}songs.json`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((songListJson) => {
+        //console.log(songListJson);
+        this.setState({
+          activeLetter: activeLetter,
+          songList: songListJson
+        });
+      });
+
   }
+
+  renderSong(song, index) {
+    return <li key={'song-' + index} >{song}</li>
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -18,6 +35,9 @@ class App extends Component {
           <Header />
           <AlphabetMenu selectLetter={this.selectLetter} />
           <h1> {this.state.activeLetter}</h1>
+          <ul>
+            {this.state.songList.map(this.renderSong)}
+          </ul>
         </div>
       </React.Fragment>
     )
