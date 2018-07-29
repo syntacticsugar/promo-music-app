@@ -13,7 +13,7 @@ class AlphabetMenu extends Component {
   /*
 
   */
-  render() {
+  render = () => {
     return (
       <React.Fragment>
         <div className="horizontal-line"></div>

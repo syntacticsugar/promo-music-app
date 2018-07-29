@@ -24,7 +24,7 @@ class App extends Component {
 
   }
 
-  render() {
+  render = () => {
     return (
       <React.Fragment>
         <div className="container">
@@ -38,7 +38,7 @@ class App extends Component {
 }
 
 class Header extends Component {
-  render() {
+  render = () => {
     return (
       <div className="App">
         <header className="App-header">
