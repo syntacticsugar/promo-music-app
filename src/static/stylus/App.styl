@@ -1,4 +1,6 @@
 @require './global.styl'
+@require './alphabetmenu.styl'
+@require './songlist.styl'
 
 body
   margin 0
@@ -37,35 +39,3 @@ body
 
 .App-intro
   font-size large
-
-.alphabet-menu-wrapper
-
-  .horizontal-line
-    width 100%
-    height 1px
-    margin 0 auto
-    margin-top 0.2em
-    background-color alphabetMenuHR
-  .horizontal-scroller
-    width 90%
-    margin 0 auto
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow-x auto
-    -webkit-overflow-scrolling touch
-    -ms-overflow-style -ms-autohiding-scrollbar
-    &::-webkit-scrollbar
-      display none
-  ul
-    font-family "roboto slab"
-    color alphabetLetter
-    font-size 1.9em
-    list-style-type none
-    margin 0
-    padding 0 // override browser default
-    li
-      padding 0 0.5em
-      display inline
-      &:hover
-        cursor pointer
-        color lighten(alphabetLetter,15)
