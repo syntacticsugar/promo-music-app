@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AudioPlayer from 'react-responsive-audio-player';
 
 class Songs extends Component {
   /*  javascript `this` scoping is a f*ing shitshow
@@ -18,11 +19,19 @@ class Songs extends Component {
 
   renderSong = (song, index) => {
     let songTitle = this.formatSongTitle(song);
+
+    //audio player
+    let url = "http://for-promotional-use-only.com/" + song;
+    let playlist = [{url: url, title: songTitle}];
+
     return (
       <li
         className="single-song-wrapper"
-        key={'song-' + index} >
+        key={'song-' + index}
+        index={index}
+        >
         <span className="title">{songTitle}</span>
+        <div><AudioPlayer playlist={playlist} /></div>
       </li>
     );
   }
