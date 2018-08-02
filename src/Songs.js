@@ -46,22 +46,16 @@ class SingleSong extends Component {
   }
 
   toggleDisplaySong = () => {
-    console.log("beginning of toggleDisplaySong");
     const displaySong = this.state.displaySong;
-    console.log("(before setState) this.state.displaySong: " + this.state.displaySong);
     this.setState({displaySong: !displaySong });
-    console.log("(after setState) this.state.displaySong: " + this.state.displaySong);
-    console.log("end of toggleDisplaySong");
   }
 
   showDisplaySong = () => {
-    console.log("beginning of showDisplaySong");
     return this.state.displaySong ? "showme" : "hideme";
-    console.log("end of showDisplaySong");
   }
 
   render = () => {
-    const { songList, song, index } = this.props;
+    const { song, index } = this.props;
     let songTitle = this.formatSongTitle(song);
 
     //audio player
@@ -75,7 +69,7 @@ class SingleSong extends Component {
         index={index}
         onClick= { ()=> this.toggleDisplaySong() }
         >
-        <span className="title">{songTitle} :{this.state.displaySong + ""}</span>
+        <span className="title">{songTitle}</span>
         <div className={ this.showDisplaySong() }>
           <AudioPlayer playlist={playlist} />
         </div>
