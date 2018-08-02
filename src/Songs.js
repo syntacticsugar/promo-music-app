@@ -9,13 +9,27 @@ class Songs extends Component {
     this.renderSong = this.renderSong.bind(this);
   }
   */
+  state = {
+    currentlyPlayingSong: null
+  }
+
+  setCurrentlyPlayingSong = index => {
+    this.setState({ currentlyPlayingSong: index});
+  }
+
+  setNothingPlaying = () => {
+    this.setState({ currentlyPlayingSong: null});
+  }
 
   renderSong = (song, index) => {
     return (
       <SingleSong
         songList={this.props.songlist}
+        currentlyPlayingSong={this.state.currentlyPlayingSong}
+        setNothingPlaying={this.setNothingPlaying}
+        setCurrentlyPlayingSong={this.setCurrentlyPlayingSong}
         song={song}
-        key={song} // for pseudo-uniqueness (shame on me)
+        key={song}
         index={index} />
     );
   }
@@ -35,7 +49,8 @@ class Songs extends Component {
 
 class SingleSong extends Component {
   state = {
-    displaySong : false,
+    //displaySong : false,
+    //playingNow: false
   }
 
   formatSongTitle = (song) => {
@@ -45,17 +60,27 @@ class SingleSong extends Component {
     return array.join("");
   }
 
-  toggleDisplaySong = () => {
-    const displaySong = this.state.displaySong;
-    this.setState({displaySong: !displaySong });
+  toggleDisplaySong = (currentlyPlayingSong) => {
+    const { setNothingPlaying, setCurrentlyPlayingSong, index } = this.props;
+    // there's already a song playing
+    if (currentlyPlayingSong === index) {
+      //this.setState({displaySong: false });
+      setNothingPlaying();
+
+    } else { // else, nothing is playing, so show THIS song
+      //this.setState({displaySong: true });
+      setCurrentlyPlayingSong(index);
+    }
   }
 
   showDisplaySong = () => {
-    return this.state.displaySong ? "showme" : "hideme";
+    const {  index, currentlyPlayingSong } = this.props; // `key` is not a prop
+
+    return currentlyPlayingSong === index ? "" : "hideme";
   }
 
   render = () => {
-    const { song, index } = this.props;
+    const { song, index, key, currentlyPlayingSong } = this.props; // `key` is not a prop
     let songTitle = this.formatSongTitle(song);
 
     //audio player
@@ -66,8 +91,8 @@ class SingleSong extends Component {
       <li
         className="single-song-wrapper"
         key={songTitle + "-" + index}
-        index={index}
-        onClick= { ()=> this.toggleDisplaySong() }
+        index={key}
+        onClick= { ()=> this.toggleDisplaySong(currentlyPlayingSong) }
         >
         <span className="title">{songTitle}</span>
         <div className={ this.showDisplaySong() }>
