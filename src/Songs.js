@@ -15,7 +15,7 @@ class Songs extends Component {
       <SingleSong
         songList={this.props.songlist}
         song={song}
-        key={"song-" + Date.now() + index} // for pseudo-uniqueness (shame on me)
+        key={song} // for pseudo-uniqueness (shame on me)
         index={index} />
     );
   }
