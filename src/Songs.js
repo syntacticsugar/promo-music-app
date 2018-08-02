@@ -15,7 +15,7 @@ class Songs extends Component {
       <SingleSong
         songList={this.props.songlist}
         song={song}
-        key={"song " + index}
+        key={"song-" + Date.now() + index} // for pseudo-uniqueness (shame on me)
         index={index} />
     );
   }
@@ -65,7 +65,7 @@ class SingleSong extends Component {
     return (
       <li
         className="single-song-wrapper"
-        key={'song-' + index}
+        key={songTitle + "-" + index}
         index={index}
         onClick= { ()=> this.toggleDisplaySong() }
         >
