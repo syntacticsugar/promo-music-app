@@ -10,6 +10,34 @@ class Songs extends Component {
   }
   */
 
+  renderSong = (song, index) => {
+    return (
+      <SingleSong
+        songList={this.props.songlist}
+        song={song}
+        key={"song " + index}
+        index={index} />
+    );
+  }
+
+  render = () => {
+    const { songList } = this.props;
+    return (
+      <React.Fragment>
+          <ul className="songlist">
+            {songList.map(this.renderSong)}
+          </ul>
+      </React.Fragment>
+    )
+  }
+}
+
+
+class SingleSong extends Component {
+  state = {
+    displaySong : false,
+  }
+
   formatSongTitle = (song) => {
     let array = song.split("");
     array.splice(0,8); // removes "mixtape"
@@ -17,7 +45,23 @@ class Songs extends Component {
     return array.join("");
   }
 
-  renderSong = (song, index) => {
+  toggleDisplaySong = () => {
+    console.log("beginning of toggleDisplaySong");
+    const displaySong = this.state.displaySong;
+    console.log("(before setState) this.state.displaySong: " + this.state.displaySong);
+    this.setState({displaySong: !displaySong });
+    console.log("(after setState) this.state.displaySong: " + this.state.displaySong);
+    console.log("end of toggleDisplaySong");
+  }
+
+  showDisplaySong = () => {
+    console.log("beginning of showDisplaySong");
+    return this.state.displaySong ? "showme" : "hideme";
+    console.log("end of showDisplaySong");
+  }
+
+  render = () => {
+    const { songList, song, index } = this.props;
     let songTitle = this.formatSongTitle(song);
 
     //audio player
@@ -29,24 +73,16 @@ class Songs extends Component {
         className="single-song-wrapper"
         key={'song-' + index}
         index={index}
+        onClick= { ()=> this.toggleDisplaySong() }
         >
-        <span className="title">{songTitle}</span>
-        <div><AudioPlayer playlist={playlist} /></div>
+        <span className="title">{songTitle} :{this.state.displaySong + ""}</span>
+        <div className={ this.showDisplaySong() }>
+          <AudioPlayer playlist={playlist} />
+        </div>
       </li>
-    );
-  }
-
-  render = () => {
-    const { songList } = this.props;
-
-    return (
-      <React.Fragment>
-          <ul className="songlist">
-            {songList.map(this.renderSong)}
-          </ul>
-      </React.Fragment>
     )
   }
+
 }
 
 export default Songs;
