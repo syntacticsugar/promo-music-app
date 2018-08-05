@@ -30,7 +30,7 @@ class Songs extends Component {
         setCurrentlyPlayingSong={this.setCurrentlyPlayingSong}
         song={song}
         key={song}
-        index={index} />
+        index={song + "-" + index} /> // has to be unique
     );
   }
 
@@ -73,10 +73,36 @@ class SingleSong extends Component {
     }
   }
 
-  showDisplaySong = () => {
+  /*
+  showOrHide = () => {
     const {  index, currentlyPlayingSong } = this.props; // `key` is not a prop
-
     return currentlyPlayingSong === index ? "" : "hideme";
+  }
+  */
+
+  handleParentClick = () => {
+    console.log('handleParentClick');
+  }
+
+  stopChildClickPropagation = (e) => {
+    e.stopPropagation();
+
+    console.log('handleChildClick');
+  }
+
+  shouldRenderAudioPlayer = () => {
+    const {  index, currentlyPlayingSong } = this.props; // `key` is not a prop
+    return currentlyPlayingSong === index;
+  }
+
+  renderAudioPlayer = (playlist) =>  {
+    if (this.shouldRenderAudioPlayer()) {
+      return (
+      <div onClick={ this.stopChildClickPropagation }>
+        <AudioPlayer playlist={playlist} />
+      </div>
+      )
+    }
   }
 
   render = () => {
@@ -91,13 +117,20 @@ class SingleSong extends Component {
       <li
         className="single-song-wrapper"
         key={songTitle + "-" + index}
-        index={key}
-        onClick= { ()=> this.toggleDisplaySong(currentlyPlayingSong) }
+        index={songTitle + "-" + index}
+        onClick= { (e)=> this.toggleDisplaySong(currentlyPlayingSong) }
+        //onClick={this.handleParentClick}
         >
         <span className="title">{songTitle}</span>
-        <div className={ this.showDisplaySong() }>
+        { this.renderAudioPlayer(playlist)}
+        {/*
+        <div
+          className={ this.showOrHide() }
+          //className=""
+          onClick={ this.handleChildClick }>
           <AudioPlayer playlist={playlist} />
         </div>
+        */}
       </li>
     )
   }
