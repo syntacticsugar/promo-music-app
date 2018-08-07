@@ -1,0 +1,29 @@
+playerBg = #dbdbdb
+playerControls = #0099d1 // blue
+playerText = #D10099 // hotpink
+//playerControls = playerText
+audioProgressBg = silver
+
+#audio_player
+  width 60%
+  margin 0 auto
+  background-color: playerBg
+  box-shadow: inset 1px 1px 10px 0px rgba(0,0,0,0.15)
+  .right_facing_triangle
+    border-left 16px solid playerControls
+  .play_pause_inner
+    .left, .right
+      background-color: playerControls
+    .triangle_1
+      border-right 30px solid playerBg
+    .triangle_2
+      border-right 30px solid playerBg
+  .audio_info // text name of song
+    display none
+    color playerText
+  .audio_time_progress
+    color playerText
+    font-size 1.0em
+  .audio_progress
+    background-color audioProgressBg
+    box-shadow: inset 1px 1px 10px 0px rgba(0,0,0,0.15)
