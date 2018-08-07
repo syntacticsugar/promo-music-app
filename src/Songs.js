@@ -38,9 +38,14 @@ class Songs extends Component {
     const { songList } = this.props;
     return (
       <React.Fragment>
+        <div className="body-content">
+          <div className="total-songs">
+            {songList.length > 0 ? songList.length + " songs" : null}
+          </div>
           <ul className="songlist">
             {songList.map(this.renderSong)}
           </ul>
+        </div>
       </React.Fragment>
     )
   }
