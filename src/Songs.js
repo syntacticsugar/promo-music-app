@@ -96,16 +96,26 @@ class SingleSong extends Component {
   }
 
   shouldRenderAudioPlayer = () => {
-    const {  index, currentlyPlayingSong } = this.props; // `key` is not a prop
+    const { index, currentlyPlayingSong } = this.props; // `key` is not a prop
     return currentlyPlayingSong === index;
   }
 
-  renderAudioPlayer = (playlist) =>  {
+  addToFavorites = (song) => {
+    console.log(`song: ${song}`);
+  }
+
+  renderAudioPlayer = (playlist,song) =>  {
     if (this.shouldRenderAudioPlayer()) {
       return (
-      <div onClick={ this.stopChildClickPropagation }>
-        <AudioPlayer playlist={playlist} />
-      </div>
+        <div className="relative">
+          <div className="" onClick={ this.stopChildClickPropagation }>
+            <AudioPlayer playlist={playlist} />
+          </div>
+          <div className="clearfix favorite-download" onClick={ this.stopChildClickPropagation }>
+            <i className="favorite fas fa-star" onClick={ () => this.addToFavorites(song) }></i>
+            <i className="download fas fa-download"></i>
+          </div>
+        </div>
       )
     }
   }
@@ -127,7 +137,7 @@ class SingleSong extends Component {
         //onClick={this.handleParentClick}
         >
         <span className="title">{songTitle}</span>
-        { this.renderAudioPlayer(playlist)}
+        { this.renderAudioPlayer(playlist,song)}
         {/*
         <div
           className={ this.showOrHide() }

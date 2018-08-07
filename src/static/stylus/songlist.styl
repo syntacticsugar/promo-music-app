@@ -20,8 +20,26 @@ ul.songlist
     &:hover
       //background-color: rgba(255,255,255,0.2)
       cursor: pointer;
-      color lighten(alphabetLetter,15)
+      color lighten(alphabetLetter,10)
       padding-bottom 9px
+      padding-top 9px
       border-bottom: 1px solid primaryAccentBlue
+      border-top: 1px solid primaryAccentBlue
     .title
       position relative
+
+.favorite-download
+  position absolute
+  right 4em
+  font-size 1.5em
+  top 26%
+  color darken(favoriteDownloadIcons, 8)
+  .favorite, .download
+    //box-shadow: inset 1px 1px 10px 0px rgba(0,0,0,0.15)
+    &:hover
+      color playerText
+  .favorite
+    float left
+    margin-right 0.5em
+  .download
+    float left
