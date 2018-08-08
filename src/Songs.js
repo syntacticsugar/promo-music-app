@@ -22,9 +22,13 @@ class Songs extends Component {
   }
 
   renderSong = (song, index) => {
+    const { songList, addToFavorites, addToRecentlyPlayed } = this.props;
+
     return (
       <SingleSong
-        songList={this.props.songlist}
+        songList={songList}
+        addToFavorites={addToFavorites}
+        addToRecentlyPlayed={addToRecentlyPlayed}
         currentlyPlayingSong={this.state.currentlyPlayingSong}
         setNothingPlaying={this.setNothingPlaying}
         setCurrentlyPlayingSong={this.setCurrentlyPlayingSong}
@@ -91,17 +95,11 @@ class SingleSong extends Component {
 
   stopChildClickPropagation = (e) => {
     e.stopPropagation();
-
-    console.log('handleChildClick');
   }
 
   shouldRenderAudioPlayer = () => {
-    const { index, currentlyPlayingSong } = this.props; // `key` is not a prop
+    const { index, currentlyPlayingSong } = this.props;
     return currentlyPlayingSong === index;
-  }
-
-  addToFavorites = (song) => {
-    console.log(`song: ${song}`);
   }
 
   renderAudioPlayer = (playlist,song) =>  {
@@ -112,7 +110,7 @@ class SingleSong extends Component {
             <AudioPlayer playlist={playlist} />
           </div>
           <div className="clearfix favorite-download" onClick={ this.stopChildClickPropagation }>
-            <i className="favorite fas fa-star" onClick={ () => this.addToFavorites(song) }></i>
+            <i className="favorite fas fa-star" onClick={ () => this.props.addToFavorites(song) }></i>
             <i className="download fas fa-download"></i>
           </div>
         </div>

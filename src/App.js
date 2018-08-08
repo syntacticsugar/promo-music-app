@@ -5,8 +5,32 @@ import Songs from './Songs';
 class App extends Component {
   state = {
           activeLetter: "",
-          songList: []
+          songList: [],
+          favorites: {},
+          recentlyPlayed: {}
   }
+  /*
+  favoriteExample = {
+    song1 : {
+      dateFavorited: "",
+      title: "",
+    },
+    song2 : {
+      dateFavorited: "",
+      title: "",
+    },
+  }
+  recentlyPlayedExample = {
+    song1 : {
+      dateFavorited: "",
+      title: "",
+    },
+    song2 : {
+      dateFavorited: "",
+      title: "",
+    },
+  }
+  */
   selectLetter = (letter) => {
     const activeLetter = letter;
 
@@ -24,13 +48,32 @@ class App extends Component {
 
   }
 
+  addToFavorites = (song) => {
+    const dateFavorited = Date.now();
+    const favorites = {...this.state.favorites};
+    favorites[`song-${Date.now()}`] = song;
+    this.setState({ favorites });
+    console.log(`${Object.keys(favorites).length} added to favorites so far`);
+  }
+
+  addToRecentlyPlayed = (song) => {
+    const datePlayed = Date.now();
+    const recentlyPlayed = {...this.state.recentlyPlayed};
+    recentlyPlayed[`song-${Date.now()}`] = song;
+    this.setState({ recentlyPlayed });
+    console.log(`${Object.keys(recentlyPlayed).length} recently played so far`);
+  }
+
   render = () => {
     return (
       <React.Fragment>
         <div className="container">
           <Header />
           <AlphabetMenu selectLetter={this.selectLetter} />
-          <Songs songList={this.state.songList} />
+          <Songs songList={this.state.songList}
+                 addToFavorites={this.addToFavorites}
+                 addToRecentlyPlayed={this.addToRecentlyPlayed}
+          />
         </div>
       </React.Fragment>
     )
