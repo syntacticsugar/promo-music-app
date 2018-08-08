@@ -28,3 +28,19 @@ audioProgressBg = #47ade4
   .audio_progress
     background-color audioProgressBg
     box-shadow: inset 1px 1px 14px 0px rgba(0,0,0,0.45)
+
+.favorite-download
+  position absolute
+  right 4em
+  font-size 1.5em
+  top 26%
+  color darken(favoriteDownloadIcons, 8)
+  .favorite, .download
+    //box-shadow: inset 1px 1px 10px 0px rgba(0,0,0,0.15)
+    &:hover
+      color playerText
+  .favorite
+    float left
+    margin-right 0.5em
+  .download
+    float left
