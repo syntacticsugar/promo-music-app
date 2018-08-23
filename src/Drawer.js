@@ -27,18 +27,16 @@ class TemporaryDrawer extends React.Component {
     });
   };
 
-
-  stopChildClickPropagation = (e) => {
-    e.stopPropagation();
-  }
-
   renderFavorites = (favorites) => {
     console.log("renderFavorites: " + favorites);
     return Object.keys(favorites).map((fave,i)=> {
       return (
         <li key={fave + "-" + Date.now()}>
           {fave}
-          <span style={{color: "silver"}} onClick={ ()=> this.props.toggleAddRemoveFavorites(fave)}>(x)</span>
+          <span style={{color: "silver"}}
+                onClick={ ()=> this.props.toggleAddRemoveFavorites(fave)}>
+                (x)
+          </span>
         </li>
       );
     })
@@ -64,7 +62,7 @@ class TemporaryDrawer extends React.Component {
           <div
             tabIndex={0}
             role="button"
-            onClick={this.toggleDrawer('left', false)}
+            onClick={this.toggleDrawer('left', true)}
             onKeyDown={this.toggleDrawer('left', false)}
           >
             {sideList}

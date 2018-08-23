@@ -5,7 +5,7 @@ import Drawer from './Drawer';
 
 class App extends Component {
   state = {
-          activeLetter: "",
+          activeLetter: "K",
           songList: [],
           favorites: {},
           recentlyPlayed: {}
