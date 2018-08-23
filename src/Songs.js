@@ -22,11 +22,12 @@ class Songs extends Component {
   }
 
   renderSong = (song, index) => {
-    const { songList, addToFavorites, addToRecentlyPlayed } = this.props;
+    const { songList, addToFavorites, favorites, addToRecentlyPlayed } = this.props;
 
     return (
       <SingleSong
         songList={songList}
+        favorites={favorites}
         addToFavorites={addToFavorites}
         addToRecentlyPlayed={addToRecentlyPlayed}
         currentlyPlayingSong={this.state.currentlyPlayingSong}
@@ -102,15 +103,36 @@ class SingleSong extends Component {
     return currentlyPlayingSong === index;
   }
 
+  renderFavoritesCSS = (song) => {
+    console.log("inside top of renderFavoritesCSS()");
+    const { favorites } = this.props;
+    let favoriteClass;
+    // if song is in favorites already
+    if (favorites.hasOwnProperty(song)) {
+        console.log("inside favorites.hasOwnProperty, for song: " + song);
+        favoriteClass = "favorite fas fa-star already-favorited";
+    } else {
+    // if song NOT currently in favorites
+        console.log("else branch for renderFavoritesCSS. Song is NOT in favorites. Song: " + song);
+        favoriteClass = "favorite fas fa-star";
+    }
+    return ( favoriteClass )
+  }
+
   renderAudioPlayer = (playlist,song) =>  {
+    const stopChildClickPropagation = this.stopChildClickPropagation;
+    const formatSongTitle = this.formatSongTitle;
+    const { addToFavorites } = this.props;
+    const formattedSongTitle = formatSongTitle(song);
     if (this.shouldRenderAudioPlayer()) {
       return (
         <div className="relative">
-          <div className="" onClick={ this.stopChildClickPropagation }>
+          <div className="" onClick={ stopChildClickPropagation }>
             <AudioPlayer playlist={playlist} />
           </div>
-          <div className="clearfix favorite-download" onClick={ this.stopChildClickPropagation }>
-            <i className="favorite fas fa-star" onClick={ () => this.props.addToFavorites(song) }></i>
+          <div className="clearfix favorite-download" onClick={ stopChildClickPropagation }>
+            <i className={ this.renderFavoritesCSS(formattedSongTitle) }
+               onClick={ () => addToFavorites(formattedSongTitle)}></i>
             <i className="download fas fa-download"></i>
           </div>
         </div>
@@ -119,7 +141,7 @@ class SingleSong extends Component {
   }
 
   render = () => {
-    const { song, index, key, currentlyPlayingSong } = this.props; // `key` is not a prop
+    const { song, index, currentlyPlayingSong } = this.props; // `key` is not a prop
     let songTitle = this.formatSongTitle(song);
 
     //audio player

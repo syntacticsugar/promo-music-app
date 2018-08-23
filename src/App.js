@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AlphabetMenu from './AlphabetMenu';
 import Songs from './Songs';
+import Drawer from './Drawer';
 
 class App extends Component {
   state = {
@@ -51,7 +52,10 @@ class App extends Component {
   addToFavorites = (song) => {
     const dateFavorited = Date.now();
     const favorites = {...this.state.favorites};
-    favorites[`song-${Date.now()}`] = song;
+    //favorites[`song-${Date.now()}`] = song;
+    favorites[song] = dateFavorited;
+    //favorites[`song`].dateFavorited = dateFavorited;
+    //favorites[`song`].title = song;
     this.setState({ favorites });
     console.log(`${Object.keys(favorites).length} added to favorites so far`);
   }
@@ -69,8 +73,10 @@ class App extends Component {
       <React.Fragment>
         <div className="container">
           <Header />
+          <Drawer favorites={this.state.favorites} />
           <AlphabetMenu selectLetter={this.selectLetter} />
           <Songs songList={this.state.songList}
+                 favorites={this.state.favorites}
                  addToFavorites={this.addToFavorites}
                  addToRecentlyPlayed={this.addToRecentlyPlayed}
           />
