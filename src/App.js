@@ -49,15 +49,17 @@ class App extends Component {
 
   }
 
-  addToFavorites = (song) => {
+  toggleAddRemoveFavorites = song => {
     const dateFavorited = Date.now();
     const favorites = {...this.state.favorites};
-    //favorites[`song-${Date.now()}`] = song;
-    favorites[song] = dateFavorited;
-    //favorites[`song`].dateFavorited = dateFavorited;
-    //favorites[`song`].title = song;
+    // if song already exists, remove it
+    if (song in favorites) {
+      delete favorites[song]; //google said to use `delete`
+    // otherwise, it doesn't exist, ADD it.
+    } else {
+      favorites[song] = dateFavorited;
+    }
     this.setState({ favorites });
-    console.log(`${Object.keys(favorites).length} added to favorites so far`);
   }
 
   addToRecentlyPlayed = (song) => {
@@ -73,11 +75,12 @@ class App extends Component {
       <React.Fragment>
         <div className="container">
           <Header />
-          <Drawer favorites={this.state.favorites} />
+          <Drawer favorites={this.state.favorites}
+                  toggleAddRemoveFavorites={this.toggleAddRemoveFavorites} />
           <AlphabetMenu selectLetter={this.selectLetter} />
           <Songs songList={this.state.songList}
                  favorites={this.state.favorites}
-                 addToFavorites={this.addToFavorites}
+                 toggleAddRemoveFavorites={this.toggleAddRemoveFavorites}
                  addToRecentlyPlayed={this.addToRecentlyPlayed}
           />
         </div>

@@ -27,11 +27,19 @@ class TemporaryDrawer extends React.Component {
     });
   };
 
+
+  stopChildClickPropagation = (e) => {
+    e.stopPropagation();
+  }
+
   renderFavorites = (favorites) => {
     console.log("renderFavorites: " + favorites);
     return Object.keys(favorites).map((fave,i)=> {
       return (
-        <li key={fave + "-" + Date.now()}>{fave}</li>
+        <li key={fave + "-" + Date.now()}>
+          {fave}
+          <span style={{color: "silver"}} onClick={ ()=> this.props.toggleAddRemoveFavorites(fave)}>(x)</span>
+        </li>
       );
     })
   }

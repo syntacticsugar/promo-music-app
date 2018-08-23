@@ -22,13 +22,13 @@ class Songs extends Component {
   }
 
   renderSong = (song, index) => {
-    const { songList, addToFavorites, favorites, addToRecentlyPlayed } = this.props;
+    const { songList, toggleAddRemoveFavorites, favorites, addToRecentlyPlayed } = this.props;
 
     return (
       <SingleSong
         songList={songList}
         favorites={favorites}
-        addToFavorites={addToFavorites}
+        toggleAddRemoveFavorites={toggleAddRemoveFavorites}
         addToRecentlyPlayed={addToRecentlyPlayed}
         currentlyPlayingSong={this.state.currentlyPlayingSong}
         setNothingPlaying={this.setNothingPlaying}
@@ -122,7 +122,7 @@ class SingleSong extends Component {
   renderAudioPlayer = (playlist,song) =>  {
     const stopChildClickPropagation = this.stopChildClickPropagation;
     const formatSongTitle = this.formatSongTitle;
-    const { addToFavorites } = this.props;
+    const { toggleAddRemoveFavorites } = this.props;
     const formattedSongTitle = formatSongTitle(song);
     if (this.shouldRenderAudioPlayer()) {
       return (
@@ -132,7 +132,7 @@ class SingleSong extends Component {
           </div>
           <div className="clearfix favorite-download" onClick={ stopChildClickPropagation }>
             <i className={ this.renderFavoritesCSS(formattedSongTitle) }
-               onClick={ () => addToFavorites(formattedSongTitle)}></i>
+               onClick={ () => toggleAddRemoveFavorites(formattedSongTitle)}></i>
             <i className="download fas fa-download"></i>
           </div>
         </div>
@@ -150,7 +150,7 @@ class SingleSong extends Component {
 
     return (
       <li
-        className="single-song-wrapper"
+        className={"single-song-wrapper " + (this.shouldRenderAudioPlayer() ? "active" : "")}
         key={songTitle + "-" + index}
         index={songTitle + "-" + index}
         onClick= { (e)=> this.toggleDisplaySong(currentlyPlayingSong) }
