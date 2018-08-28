@@ -54,11 +54,19 @@ class TemporaryDrawer extends React.Component {
       </div>
     );
 
+    const modalProps = {
+      BackdropProps: {
+        classes: {
+          root: "drawer-backdrop-override"
+        }
+      }
+    }
+
     return (
       <div>
         <Button onClick={this.toggleDrawer('left', true)}>Favorites</Button>
 
-        <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
+        <Drawer open={this.state.left} classes={ { "paper": "drawer-override" } } onClose={this.toggleDrawer('left', false)} ModalProps={ modalProps }>
           <div
             tabIndex={0}
             role="button"
