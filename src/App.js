@@ -4,12 +4,25 @@ import Songs from './Songs';
 import Drawer from './Drawer';
 
 class App extends Component {
-  state = {
-          activeLetter: "K",
-          songList: [],
-          favorites: {},
-          recentlyPlayed: {}
+  constructor(props) {
+    super(props);
+
+    const defaultState = {
+      activeLetter: "K",
+      songList: [],
+      favorites: {},
+      recentlyPlayed: {}
+    }
+
+    const savedState = localStorage.getItem('state');
+
+    this.state = savedState ? JSON.parse(savedState) : defaultState;
   }
+
+  componentDidUpdate() {
+    localStorage.setItem('state', JSON.stringify(this.state));
+  }
+
   /*
   favoriteExample = {
     song1 : {
