@@ -22,13 +22,14 @@ class Songs extends Component {
   }
 
   renderSong = (song, index) => {
-    const { songList, toggleAddRemoveFavorites, favorites, addToRecentlyPlayed } = this.props;
+    const { songList, toggleAddRemoveFavorites, favorites, addToRecentlyPlayed, toggleAddRemoveRecentlyPlayed } = this.props;
 
     return (
       <SingleSong
         songList={songList}
         favorites={favorites}
         toggleAddRemoveFavorites={toggleAddRemoveFavorites}
+        toggleAddRemoveRecentlyPlayed={toggleAddRemoveRecentlyPlayed}
         addToRecentlyPlayed={addToRecentlyPlayed}
         currentlyPlayingSong={this.state.currentlyPlayingSong}
         setNothingPlaying={this.setNothingPlaying}
@@ -118,17 +119,24 @@ class SingleSong extends Component {
     }
     return ( favoriteClass )
   }
+  handlePlay = (song) => {
+    const { toggleAddRemoveRecentlyPlayed } = this.props;
+    console.log("--------------------------------------------INSIDE this.handlePlay");
+    toggleAddRemoveRecentlyPlayed(song);
+  }
 
   renderAudioPlayer = (playlist,song) =>  {
     const stopChildClickPropagation = this.stopChildClickPropagation;
     const formatSongTitle = this.formatSongTitle;
-    const { toggleAddRemoveFavorites } = this.props;
+    const { toggleAddRemoveFavorites, toggleAddRemoveRecentlyPlayed } = this.props;
     const formattedSongTitle = formatSongTitle(song);
     if (this.shouldRenderAudioPlayer()) {
       return (
         <div className="relative">
           <div className="" onClick={ stopChildClickPropagation }>
-            <AudioPlayer playlist={playlist} />
+            <AudioPlayer playlist={playlist}
+                         onMediaEvent={{"play": () => this.handlePlay(song)}}
+            />
           </div>
           <div className="clearfix favorite-download" onClick={ stopChildClickPropagation }>
             <i className={ this.renderFavoritesCSS(formattedSongTitle) }

@@ -42,8 +42,23 @@ class TemporaryDrawer extends React.Component {
     })
   }
 
+  renderRecentlyPlayed = (recentlyPlayed) => {
+    console.log("renderRecentlyPlayed: " + recentlyPlayed);
+    return Object.keys(recentlyPlayed).map((recent,i)=> {
+      return (
+        <li key={recent + "-" + Date.now()}>
+          {recent}
+          <span style={{color: "silver"}}
+                onClick={ ()=> this.props.toggleAddRemoveRecentlyPlayed(recent)}>
+                (x)
+          </span>
+        </li>
+      );
+    })
+  }
+
   render() {
-    const { classes, favorites } = this.props;
+    const { classes, favorites, recentlyPlayed } = this.props;
 
     const sideList = (
       <div className="drawer-wrapper">
@@ -51,7 +66,12 @@ class TemporaryDrawer extends React.Component {
         <ol>
           { this.renderFavorites(favorites) }
         </ol>
+        <h4>Recently Played</h4>
+        <ol>
+          { this.renderRecentlyPlayed(recentlyPlayed) }
+        </ol>
       </div>
+
     );
 
     const modalProps = {
