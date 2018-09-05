@@ -26,11 +26,16 @@ audioProgressBg = #47ade4
     color playerText
   .audio_time_progress
     color playerText
+    color white
     font-size 1.0em
-    background-color rgba(0,0,0,0.9)
+    //background-color rgba(0,0,0,0.2)
+    //background-color #198bb9 // muted slate-blue
+    text-shadow: 1px 1px 8px rgba(0,0,0,0.5)
     padding 0 5px
-  .audio_progress
-    background-color deeppink
+  .audio_progress // when song is playing
+    //background-color lighten(audioProgressBg,10)
+    //background-color hsla(191,87,53,1) // teal seafoam
+    background-color #e71dae // cool-toned pink
     box-shadow: inset 1px 1px 14px 0px rgba(0,0,0,0.45);
   .audio_progress_container
     background-color audioProgressBg
@@ -53,6 +58,14 @@ audioProgressBg = #47ade4
     &:active
       color lighten(alphabetLetter,10)
       top 2px
+    .fas
+      &:active
+        background-color: #565656;
+        color: transparent;
+        text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
   .already-favorited
     color lighten(alphabetLetter,10)
     &:hover
