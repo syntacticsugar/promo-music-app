@@ -8,7 +8,10 @@
     margin 0 auto
     margin-top 0.2em
     background-color alphabetMenuHR
+    &.margin-top-zero
+      margin-top 0
   .horizontal-scroller
+    position relative
     height 39px
     width 90%
     margin 0 auto
@@ -20,6 +23,7 @@
     &::-webkit-scrollbar
       display none
   ul
+    position relative
     font-family primaryAccentFont
     color alphabetLetter
     font-size 1.7em
@@ -27,8 +31,13 @@
     margin 0
     padding 0 // override browser default
     li
-      padding 0 0.5em
+      //border 1px solid thistle
+      position relative
+      padding 0.35em 0.5em
       display inline
       &:hover
         cursor pointer
         color lighten(alphabetLetter,15)
+      &.active-letter
+        color lighten(alphabetLetter,15)
+        background-color rgba(255,255,255,0.5)

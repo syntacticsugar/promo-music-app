@@ -106,7 +106,7 @@ class App extends Component {
                   recentlyPlayed={this.state.recentlyPlayed}
                   toggleAddRemoveFavorites={this.toggleAddRemoveFavorites}
                   toggleAddRemoveRecentlyPlayed={this.toggleAddRemoveRecentlyPlayed} />
-          <AlphabetMenu selectLetter={this.selectLetter} />
+          <AlphabetMenu selectLetter={this.selectLetter} activeLetter={this.state.activeLetter}/>
           <Songs songList={this.state.songList}
                  favorites={this.state.favorites}
                  toggleAddRemoveFavorites={this.toggleAddRemoveFavorites}

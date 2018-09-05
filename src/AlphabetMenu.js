@@ -3,16 +3,27 @@ import React, { Component } from 'react';
 const alphabetConst = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
 
 class AlphabetMenu extends Component {
+  activeLetterClass = letter => {
+    const activeLetter = this.props.activeLetter;
+    let activeLetterClass = "";
+    if (activeLetter === letter) { // activeLetter matches letter
+        activeLetterClass="active-letter";
+    } else { // not a match
+        activeLetterClass="not-selected";
+    }
+    return activeLetterClass;
+  }
   createLetter = (letter) => {
     //console.log(`trying to create letter "${letter}"`);
     const selectLetter = this.props.selectLetter;
     return (
-      <li key={letter} onClick={ ()=>selectLetter(letter)}>{letter}</li>
+      <li
+        key={letter}
+        onClick={ ()=>selectLetter(letter)}
+        className={this.activeLetterClass(letter)}
+        >{letter}</li>
     )
   }
-  /*
-
-  */
   render = () => {
     return (
       <React.Fragment>
@@ -27,7 +38,7 @@ class AlphabetMenu extends Component {
               </ul>
             </div>
 
-            <div className="horizontal-line"></div>
+            <div className="horizontal-line margin-top-zero"></div>
             <div className="horizontal-line"></div>
         </div>
       </React.Fragment>
