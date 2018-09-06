@@ -51,9 +51,28 @@ body
   h4
     color titleBlue
     text-transform: uppercase;
+    i.fas.fa-star
+      margin-right 0.7em
+      font-size 0.8em
+      position relative
+      top -2px
   ol
+    color drawerListTextColor
+    list-style-type: circle;
     li
       margin 0
+      position relative
+      span.delete
+        position relative
+        padding 7px
+        color darken(silver,9)
+        font-size 0.9em
+        &:hover
+          cursor pointer
+          color brightOceanBlue
+        &:active
+          color darken(silver,9)
+          bottom -1px
 
 
 .drawer-backdrop-override
@@ -62,3 +81,9 @@ body
   max-width 25%
   min-width 300px
   background-color lighten(silver,15) !important
+.open-drawer
+  i.fas.fa-star
+    color alphabetLetter
+    &:hover
+      cursor pointer
+      color brightOceanBlue

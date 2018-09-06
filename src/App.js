@@ -97,15 +97,28 @@ class App extends Component {
     console.log(`${Object.keys(recentlyPlayed).length} recently played so far`);
   }
 
+  // renders if any there are any favorites, or if any songs have been played
+  renderDrawer = () => {
+    const { favorites, recentlyPlayed } = this.state;
+    const favoritesLength = Object.keys(favorites).length;
+    const recentlyPlayedLength = Object.keys(recentlyPlayed).length;
+    if (favoritesLength > 0 || recentlyPlayedLength > 0) {
+      return (
+          <Drawer favorites={this.state.favorites}
+                  recentlyPlayed={this.state.recentlyPlayed}
+                  toggleAddRemoveFavorites={this.toggleAddRemoveFavorites}
+                  toggleAddRemoveRecentlyPlayed={this.toggleAddRemoveRecentlyPlayed} />
+      )
+    }
+
+  }
+
   render = () => {
     return (
       <React.Fragment>
         <div className="container">
           <Header />
-          <Drawer favorites={this.state.favorites}
-                  recentlyPlayed={this.state.recentlyPlayed}
-                  toggleAddRemoveFavorites={this.toggleAddRemoveFavorites}
-                  toggleAddRemoveRecentlyPlayed={this.toggleAddRemoveRecentlyPlayed} />
+          { this.renderDrawer() }
           <AlphabetMenu selectLetter={this.selectLetter} activeLetter={this.state.activeLetter}/>
           <Songs songList={this.state.songList}
                  favorites={this.state.favorites}

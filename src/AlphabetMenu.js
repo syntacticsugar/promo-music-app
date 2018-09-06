@@ -8,8 +8,6 @@ class AlphabetMenu extends Component {
     let activeLetterClass = "";
     if (activeLetter === letter) { // activeLetter matches letter
         activeLetterClass="active-letter";
-    } else { // not a match
-        activeLetterClass="not-selected";
     }
     return activeLetterClass;
   }

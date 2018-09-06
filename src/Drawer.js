@@ -28,14 +28,13 @@ class TemporaryDrawer extends React.Component {
   };
 
   renderFavorites = (favorites) => {
-    console.log("renderFavorites: " + favorites);
     return Object.keys(favorites).map((fave,i)=> {
       return (
         <li key={fave + "-" + Date.now()}>
           {fave}
-          <span style={{color: "silver"}}
+          <span className="delete"
                 onClick={ ()=> this.props.toggleAddRemoveFavorites(fave)}>
-                (x)
+                <i className="fas fa-times"></i>
           </span>
         </li>
       );
@@ -43,14 +42,13 @@ class TemporaryDrawer extends React.Component {
   }
 
   renderRecentlyPlayed = (recentlyPlayed) => {
-    console.log("renderRecentlyPlayed: " + recentlyPlayed);
     return Object.keys(recentlyPlayed).map((recent,i)=> {
       return (
         <li key={recent + "-" + Date.now()}>
           {recent}
-          <span style={{color: "silver"}}
+          <span className="delete"
                 onClick={ ()=> this.props.toggleAddRemoveRecentlyPlayed(recent)}>
-                (x)
+                <i className="fas fa-times"></i>
           </span>
         </li>
       );
@@ -62,7 +60,10 @@ class TemporaryDrawer extends React.Component {
 
     const sideList = (
       <div className="drawer-wrapper">
-        <h4>Favorites</h4>
+        <h4>
+          <i className="fas fa-star"></i>
+          Favorites
+        </h4>
         <ol>
           { this.renderFavorites(favorites) }
         </ol>
@@ -84,7 +85,9 @@ class TemporaryDrawer extends React.Component {
 
     return (
       <div>
-        <Button onClick={this.toggleDrawer('left', true)}>Favorites</Button>
+        <Button className="open-drawer" onClick={this.toggleDrawer('left', true)}>
+          <i className="fas fa-star"></i>
+        </Button>
 
         <Drawer open={this.state.left} classes={ { "paper": "drawer-override" } } onClose={this.toggleDrawer('left', false)} ModalProps={ modalProps }>
           <div
