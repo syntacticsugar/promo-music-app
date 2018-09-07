@@ -105,23 +105,19 @@ class SingleSong extends Component {
   }
 
   renderFavoritesCSS = (song) => {
-    console.log("inside top of renderFavoritesCSS()");
     const { favorites } = this.props;
     let favoriteClass;
     // if song is in favorites already
     if (favorites.hasOwnProperty(song)) {
-        console.log("inside favorites.hasOwnProperty, for song: " + song);
         favoriteClass = "favorite fas fa-star already-favorited";
     } else {
     // if song NOT currently in favorites
-        console.log("else branch for renderFavoritesCSS. Song is NOT in favorites. Song: " + song);
-        favoriteClass = "favorite fas fa-star";
+        favoriteClass = "favorite far fa-star";
     }
     return ( favoriteClass )
   }
   handlePlay = (song) => {
     const { toggleAddRemoveRecentlyPlayed } = this.props;
-    console.log("--------------------------------------------INSIDE this.handlePlay");
     toggleAddRemoveRecentlyPlayed(song);
   }
 

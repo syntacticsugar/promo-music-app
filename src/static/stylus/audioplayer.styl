@@ -51,24 +51,28 @@ audioProgressBg = #47ade4
     position relative
     //box-shadow: inset 1px 1px 10px 0px rgba(0,0,0,0.15)
     &:hover
-      color playerText
+      color lighten(alphabetLetter,10)
+      color #d10099
   .favorite
     float left
     margin-right 0.5em
     &:active
-      color lighten(alphabetLetter,10)
+      color alphabetLetter
+      color #d10099
       top 2px
     .fas
       &:active
-        background-color: #565656;
-        color: transparent;
-        text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
-        -webkit-background-clip: text;
-        -moz-background-clip: text;
-        background-clip: text;
+        //background-color: #565656;
+        //color: transparent;
+        //text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+        //-webkit-background-clip: text;
+        //-moz-background-clip: text;
+        //background-clip: text;
+        color #d10099
   .already-favorited
-    color lighten(alphabetLetter,10)
+    color #d10099
     &:hover
-      color lighten(alphabetLetter,15)
+      color alphabetLetter
+      color lighten(#d10099,10)
   .download
     float left
