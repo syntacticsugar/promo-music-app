@@ -135,7 +135,7 @@ class SingleSong extends Component {
         <div className="relative">
           <div className="" onClick={ stopChildClickPropagation }>
             <AudioPlayer playlist={playlist}
-                         onMediaEvent={{"play": () => this.handlePlay(song)}}
+                         onMediaEvent={{"play": () => this.handlePlay(formattedSongTitle)}}
             />
           </div>
           <div className="clearfix favorite-download" onClick={ stopChildClickPropagation }>

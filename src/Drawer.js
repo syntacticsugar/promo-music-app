@@ -28,31 +28,43 @@ class TemporaryDrawer extends React.Component {
   };
 
   renderFavorites = (favorites) => {
-    return Object.keys(favorites).map((fave,i)=> {
+    if (Object.keys(favorites).length < 1) {
       return (
-        <li key={fave + "-" + Date.now()}>
-          {fave}
-          <span className="delete"
-                onClick={ ()=> this.props.toggleAddRemoveFavorites(fave)}>
-                <i className="fas fa-times"></i>
-          </span>
-        </li>
-      );
-    })
+        <p>None yet, start favoriting something!</p>
+      )
+    } else {
+        return Object.keys(favorites).map((fave,i)=> {
+          return (
+            <li key={fave + "-" + Date.now()}>
+              {fave}
+              <span className="delete"
+                    onClick={ ()=> this.props.toggleAddRemoveFavorites(fave)}>
+                    <i className="fas fa-times"></i>
+              </span>
+            </li>
+          );
+        })
+    }
   }
 
   renderRecentlyPlayed = (recentlyPlayed) => {
-    return Object.keys(recentlyPlayed).map((recent,i)=> {
+    if (Object.keys(recentlyPlayed).length < 1) {
       return (
-        <li key={recent + "-" + Date.now()}>
-          {recent}
-          <span className="delete"
-                onClick={ ()=> this.props.toggleAddRemoveRecentlyPlayed(recent)}>
-                <i className="fas fa-times"></i>
-          </span>
-        </li>
-      );
-    })
+        <p>None yet, start playing something!</p>
+      )
+    } else {
+        return Object.keys(recentlyPlayed).map((recent,i)=> {
+          return (
+            <li key={recent + "-" + Date.now()}>
+              {recent}
+              <span className="delete"
+                    onClick={ ()=> this.props.toggleAddRemoveRecentlyPlayed(recent)}>
+                    <i className="fas fa-times"></i>
+              </span>
+            </li>
+          );
+        })
+    }
   }
 
   render() {
