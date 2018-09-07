@@ -121,6 +121,9 @@ class SingleSong extends Component {
     toggleAddRemoveRecentlyPlayed(song);
   }
 
+  handleNextOrPrevious = (direction) => {
+    console.log(direction);
+  }
   renderAudioPlayer = (playlist,song) =>  {
     const stopChildClickPropagation = this.stopChildClickPropagation;
     const formatSongTitle = this.formatSongTitle;
@@ -131,7 +134,10 @@ class SingleSong extends Component {
         <div className="relative">
           <div className="" onClick={ stopChildClickPropagation }>
             <AudioPlayer playlist={playlist}
-                         onMediaEvent={{"play": () => this.handlePlay(formattedSongTitle)}}
+                         onMediaEvent={{"play": () => this.handlePlay(formattedSongTitle),
+                                        //"abort": () => console.log('previous track clicked'),
+                                        //"ended": () => console.log('next track clicked')
+                                      }}
             />
           </div>
           <div className="clearfix favorite-download" onClick={ stopChildClickPropagation }>
