@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import AudioPlayer from 'react-responsive-audio-player';
+// for animations
+import Collapse from '@material-ui/core/Collapse';
 
 class Songs extends Component {
   /*  javascript `this` scoping is a f*ing shitshow
@@ -62,6 +64,11 @@ class SingleSong extends Component {
   state = {
     //displaySong : false,
     //playingNow: false
+    unfurled: false
+  }
+
+  handleUnfurl = () => {
+    this.setState(state => ({ unfurled: !state.unfurled }));
   }
 
   formatSongTitle = (song) => {
@@ -76,7 +83,7 @@ class SingleSong extends Component {
     // there's already a song playing
     if (currentlyPlayingSong === index) {
       //this.setState({displaySong: false });
-      setNothingPlaying();
+      setNothingPlaying() ;
 
     } else { // else, nothing is playing, so show THIS song
       //this.setState({displaySong: true });
@@ -125,11 +132,12 @@ class SingleSong extends Component {
     console.log(direction);
   }
   renderAudioPlayer = (playlist,song) =>  {
+
     const stopChildClickPropagation = this.stopChildClickPropagation;
     const formatSongTitle = this.formatSongTitle;
     const { toggleAddRemoveFavorites, toggleAddRemoveRecentlyPlayed } = this.props;
     const formattedSongTitle = formatSongTitle(song);
-    if (this.shouldRenderAudioPlayer()) {
+    // if (this.shouldRenderAudioPlayer()) {
       return (
         <div className="relative">
           <div className="" onClick={ stopChildClickPropagation }>
@@ -147,11 +155,12 @@ class SingleSong extends Component {
           </div>
         </div>
       )
-    }
+    // }
   }
 
   render = () => {
     const { song, index, currentlyPlayingSong } = this.props; // `key` is not a prop
+    const { unfurled } = this.state;
     let songTitle = this.formatSongTitle(song);
 
     //audio player
@@ -167,7 +176,9 @@ class SingleSong extends Component {
         //onClick={this.handleParentClick}
         >
         <span className="title">{songTitle}</span>
-        { this.renderAudioPlayer(playlist,song)}
+          <Collapse in={this.shouldRenderAudioPlayer()} unmountOnExit timeout={{enter:300, exit:500}}>
+            { this.renderAudioPlayer(playlist,song)}
+          </Collapse>
         {/*
         <div
           className={ this.showOrHide() }
