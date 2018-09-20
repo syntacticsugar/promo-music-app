@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AlphabetMenu from './AlphabetMenu';
 import Songs from './Songs';
 import Drawer from './Drawer';
+import ScrollToTop from 'react-scroll-up';
 
 class App extends Component {
   constructor(props) {
@@ -121,11 +122,15 @@ class App extends Component {
           { this.renderDrawer() }
           <AlphabetMenu selectLetter={this.selectLetter} activeLetter={this.state.activeLetter}/>
           <Songs songList={this.state.songList}
+                 key={this.state.activeLetter} //  “reset” some state when a prop changes
                  favorites={this.state.favorites}
                  toggleAddRemoveFavorites={this.toggleAddRemoveFavorites}
                  toggleAddRemoveRecentlyPlayed={this.toggleAddRemoveRecentlyPlayed}
           />
         </div>
+        <ScrollToTop showUnder={160}>
+            <span><i className="scroll-up fa fa-angle-double-up "></i></span>
+        </ScrollToTop>
       </React.Fragment>
     )
   }

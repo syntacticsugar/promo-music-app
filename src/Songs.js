@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import AudioPlayer from 'react-responsive-audio-player';
 // for animations
 import Collapse from '@material-ui/core/Collapse';
@@ -23,6 +24,16 @@ class Songs extends Component {
     this.setState({ currentlyPlayingSong: null});
   }
 
+  setNextSong = (index) =>  {
+    console.log('next called with', index);
+    this.setCurrentlyPlayingSong(index + 1);
+  }
+
+  setPreviousSong = (index) =>  {
+    console.log('previous called with', index);
+    this.setCurrentlyPlayingSong(index - 1);
+  }
+
   renderSong = (song, index) => {
     const { songList, toggleAddRemoveFavorites, favorites, addToRecentlyPlayed, toggleAddRemoveRecentlyPlayed } = this.props;
 
@@ -32,15 +43,24 @@ class Songs extends Component {
         favorites={favorites}
         toggleAddRemoveFavorites={toggleAddRemoveFavorites}
         toggleAddRemoveRecentlyPlayed={toggleAddRemoveRecentlyPlayed}
+        onNext={() => this.setNextSong(index)}
+        onPrevious={() => this.setPreviousSong(index)}
         addToRecentlyPlayed={addToRecentlyPlayed}
         currentlyPlayingSong={this.state.currentlyPlayingSong}
         setNothingPlaying={this.setNothingPlaying}
         setCurrentlyPlayingSong={this.setCurrentlyPlayingSong}
         song={song}
-        key={song}
-        index={song + "-" + index} /> // has to be unique
+        key={song + "-" + index}
+        index={index} />
     );
   }
+  /* React Documentation:
+  If you want to “reset” some state when a prop changes, consider either
+  making a component fully controlled or fully uncontrolled with a key instead.
+  Hence, I added a key to <Songs key={this.state.activeLetter}  /> in the
+  parent level App component.
+  TL;DR
+  */
 
   render = () => {
     const { songList } = this.props;
@@ -52,7 +72,7 @@ class Songs extends Component {
           </div>
           <ul className="songlist">
             {songList.map(this.renderSong)}
-          </ul>
+          </ul>u
         </div>
       </React.Fragment>
     )
@@ -131,6 +151,35 @@ class SingleSong extends Component {
   handleNextOrPrevious = (direction) => {
     console.log(direction);
   }
+
+  playPreviousTrack = () =>  {
+    const { onPrevious } = this.props;
+    onPrevious();
+  }
+
+  playNextTrack = () =>  {
+    const { onNext } = this.props;
+    onNext();
+  }
+
+  getAudioPlayerRef = (ref) =>  {
+    if (this.audioPlayerRef) {
+      const audioPlayerDOM = ReactDOM.findDOMNode(this.audioPlayerRef);
+      const [previousButton, nextButton] = audioPlayerDOM.querySelectorAll('.skip_button');
+      previousButton.removeEventListener('click', this.playPreviousTrack);
+      nextButton.removeEventListener('click', this.playNextTrack);
+    }
+
+    this.audioPlayerRef = ref;
+
+    if (ref) {
+      const audioPlayerDOM = ReactDOM.findDOMNode(ref);
+      const [previousButton, nextButton] = audioPlayerDOM.querySelectorAll('.skip_button');
+      previousButton.addEventListener('click', this.playPreviousTrack);
+      nextButton.addEventListener('click', this.playNextTrack);
+    }
+  }
+
   renderAudioPlayer = (playlist,song) =>  {
 
     const stopChildClickPropagation = this.stopChildClickPropagation;
@@ -141,11 +190,8 @@ class SingleSong extends Component {
       return (
         <div className="relative">
           <div className="" onClick={ stopChildClickPropagation }>
-            <AudioPlayer playlist={playlist}
-                         onMediaEvent={{"play": () => this.handlePlay(formattedSongTitle),
-                                        //"abort": () => console.log('previous track clicked'),
-                                        //"ended": () => console.log('next track clicked')
-                                      }}
+            <AudioPlayer autoplay autoplayDelayInSeconds={0.5} ref={this.getAudioPlayerRef} cycle={false} playlist={playlist}
+                         onMediaEvent={{"play": () => this.handlePlay(formattedSongTitle)}}
             />
           </div>
           <div className="clearfix favorite-download" onClick={ stopChildClickPropagation }>
