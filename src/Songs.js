@@ -59,7 +59,6 @@ class Songs extends Component {
   making a component fully controlled or fully uncontrolled with a key instead.
   Hence, I added a key to <Songs key={this.state.activeLetter}  /> in the
   parent level App component.
-  TL;DR
   */
 
   render = () => {
@@ -72,7 +71,7 @@ class Songs extends Component {
           </div>
           <ul className="songlist">
             {songList.map(this.renderSong)}
-          </ul>u
+          </ul>
         </div>
       </React.Fragment>
     )

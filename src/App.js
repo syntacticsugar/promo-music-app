@@ -76,6 +76,18 @@ class App extends Component {
     this.setState({ favorites });
   }
 
+  deleteAllFaves = () => {
+    console.log("before deleting all faves");
+    this.setState( {favorites: {}} );
+    console.log("after deleting all faves");
+  }
+
+  deleteAllRecents = () => {
+    console.log("before deleting recents");
+    this.setState( {recentlyPlayed: {}} );
+    console.log("after deleting recents");
+  }
+
   toggleAddRemoveRecentlyPlayed = song => {
     const datePlayed = Date.now();
     const recentlyPlayed = {...this.state.recentlyPlayed};
@@ -106,6 +118,8 @@ class App extends Component {
     if (favoritesLength > 0 || recentlyPlayedLength > 0) {
       return (
           <Drawer favorites={this.state.favorites}
+                  deleteAllFaves={this.deleteAllFaves}
+                  deleteAllRecents={this.deleteAllRecents}
                   recentlyPlayed={this.state.recentlyPlayed}
                   toggleAddRemoveFavorites={this.toggleAddRemoveFavorites}
                   toggleAddRemoveRecentlyPlayed={this.toggleAddRemoveRecentlyPlayed} />

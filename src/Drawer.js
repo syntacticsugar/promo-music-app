@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
+import Collapse from '@material-ui/core/Collapse';
 
 const styles = {
   list: {
@@ -19,6 +20,7 @@ class TemporaryDrawer extends React.Component {
     left: false,
     bottom: false,
     right: false,
+    deleted: false
   };
 
   toggleDrawer = (side, open) => () => {
@@ -27,21 +29,29 @@ class TemporaryDrawer extends React.Component {
     });
   };
 
+  toggleFavesDelete = fave => {
+    this.props.toggleAddRemoveFavorites(fave);
+    this.setState({ deleted: true });
+  }
+
   renderFavorites = (favorites) => {
+    const { deleted } = this.state;
     if (Object.keys(favorites).length < 1) {
       return (
-        <p>None yet, start favoriting something!</p>
+        <p className="default-empty-songs">None yet, start favoriting something!</p>
       )
     } else {
         return Object.keys(favorites).map((fave,i)=> {
           return (
-            <li key={fave + "-" + Date.now()}>
-              {fave}
-              <span className="delete"
-                    onClick={ ()=> this.props.toggleAddRemoveFavorites(fave)}>
-                    <i className="fas fa-times"></i>
-              </span>
-            </li>
+            <Collapse in={deleted}>
+              <li key={fave + "-" + Date.now()}>
+                {fave}
+                <span className="delete"
+                      onClick={ ()=> this.toggleFavesDelete(fave)}>
+                      <i className="fas fa-times"></i>
+                </span>
+              </li>
+            </Collapse>
           );
         })
     }
@@ -50,7 +60,7 @@ class TemporaryDrawer extends React.Component {
   renderRecentlyPlayed = (recentlyPlayed) => {
     if (Object.keys(recentlyPlayed).length < 1) {
       return (
-        <p>None yet, start playing something!</p>
+        <p className="default-empty-songs">None yet, start playing something!</p>
       )
     } else {
         return Object.keys(recentlyPlayed).map((recent,i)=> {
@@ -68,18 +78,21 @@ class TemporaryDrawer extends React.Component {
   }
 
   render() {
-    const { classes, favorites, recentlyPlayed } = this.props;
+    const { favorites, recentlyPlayed, deleteAllFaves, deleteAllRecents } = this.props;
 
     const sideList = (
       <div className="drawer-wrapper">
-        <h4>
+        <h4 onDoubleClick={()=> { deleteAllFaves() }}>
           <i className="fas fa-star"></i>
           Favorites
         </h4>
         <ol>
           { this.renderFavorites(favorites) }
         </ol>
-        <h4>Recently Played</h4>
+        <h4 onDoubleClick={()=> { deleteAllRecents() }}>
+          <i className="fa fa-play"></i>
+          Recently Played
+        </h4>
         <ol>
           { this.renderRecentlyPlayed(recentlyPlayed) }
         </ol>
