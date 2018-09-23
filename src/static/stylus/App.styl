@@ -44,34 +44,49 @@ body
 .drawer-wrapper
   //min-width 411px
   //max-width 25%
-  padding-left 2rem
+  padding-left 1.4rem
   padding-right 1rem
   padding-top 2rem
   font-family: drawerListFont
+  .default-empty-songs
+    color #89b7d0
+    letter-spacing: 0.06em
   h4
-    color titleBlue
+    //color titleBlue
+    color hsla(198, 73%, 52%, 1)
+    color hsl(198, 68%, 80%)
     text-transform: uppercase;
-    i.fas.fa-star
+    background-color: rgba(0,0,0,0.6)
+    display: inline-block;
+    padding 6px 7px 0 6px
+    i.fas.fa-star, i.fa.fa-play
+      color hsla(198, 73%, 42%, 1)
       margin-right 0.4em
-      font-size 0.8em
+      font-size 0.7em
       position relative
       top -2px
   ol
     color drawerListTextColor
     list-style-type: circle;
+    margin-left -0.6em
     li
       margin 0
       position relative
+      color hsla(201, 48%, 32%, 1)
+      color hsla(201, 100%, 99%, 1)
+      font-size 1.1em
+      letter-spacing: 0.05em
       span.delete
         position relative
         padding 7px
-        color darken(silver,9)
+        color darken(silver,4)
         font-size 0.9em
         &:hover
           cursor pointer
           color brightOceanBlue
+          color hsla(198, 70%, 63%, 1)
         &:active
-          color darken(silver,9)
+          color hsla(198, 70%, 43%, 1)
           bottom -1px
 
 
@@ -79,8 +94,9 @@ body
   background-color transparent !important
 .drawer-override
   max-width 27%
-  min-width 345px
-  background-color lighten(silver,20) !important
+  min-width 405px
+  //background-color lighten(silver,25) !important
+  background-color #29739a !important
 .open-drawer
   i.fas.fa-star
     color alphabetLetter
