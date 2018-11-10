@@ -110,9 +110,11 @@ class TemporaryDrawer extends React.Component {
 
     return (
       <div>
-        <Button className="open-drawer" onClick={this.toggleDrawer('left', true)}>
-          <i className="fas fa-star"></i>
-        </Button>
+        <div className="star-button">
+          <Button className="open-drawer" onClick={this.toggleDrawer('left', true)}>
+            <i className="fas fa-star"></i>
+          </Button>
+        </div>
 
         <Drawer open={this.state.left} classes={ { "paper": "drawer-override" } } onClose={this.toggleDrawer('left', false)} ModalProps={ modalProps }>
           <div

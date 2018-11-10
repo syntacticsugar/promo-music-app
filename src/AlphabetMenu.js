@@ -25,19 +25,21 @@ class AlphabetMenu extends Component {
   render = () => {
     return (
       <React.Fragment>
-        <div className="horizontal-line"></div>
-        <div className="alphabet-menu-wrapper">
-            <div className="horizontal-line"></div>
-            <div className="horizontal-line"></div>
+        <div className="header-wrapper">
+          <div className="horizontal-line"></div>
+          <div className="alphabet-menu-wrapper">
+              <div className="horizontal-line"></div>
+              <div className="horizontal-line"></div>
 
-            <div className="horizontal-scroller">
-              <ul>
-                { alphabetConst.map((letter) => this.createLetter(letter) ) }
-              </ul>
-            </div>
+              <div className="horizontal-scroller">
+                <ul>
+                  { alphabetConst.map((letter) => this.createLetter(letter) ) }
+                </ul>
+              </div>
 
-            <div className="horizontal-line margin-top-zero"></div>
-            <div className="horizontal-line"></div>
+              <div className="horizontal-line margin-top-zero"></div>
+              <div className="horizontal-line"></div>
+          </div>
         </div>
       </React.Fragment>
     )

@@ -133,8 +133,8 @@ class App extends Component {
       <React.Fragment>
         <div className="container">
           <Header />
-          { this.renderDrawer() }
           <AlphabetMenu selectLetter={this.selectLetter} activeLetter={this.state.activeLetter}/>
+          { this.renderDrawer() }
           <Songs songList={this.state.songList}
                  key={this.state.activeLetter} //  “reset” some state when a prop changes
                  favorites={this.state.favorites}
