@@ -43,7 +43,7 @@ class TemporaryDrawer extends React.Component {
     } else {
         return Object.keys(favorites).map((fave,i)=> {
           return (
-            <Collapse in={deleted}>
+            //<Collapse in={deleted}>
               <li key={fave + "-" + Date.now()}>
                 {fave}
                 <span className="delete"
@@ -51,7 +51,7 @@ class TemporaryDrawer extends React.Component {
                       <i className="fas fa-times"></i>
                 </span>
               </li>
-            </Collapse>
+            //</Collapse>
           );
         })
     }
