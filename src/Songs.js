@@ -185,6 +185,7 @@ class SingleSong extends Component {
     const formatSongTitle = this.formatSongTitle;
     const { toggleAddRemoveFavorites, toggleAddRemoveRecentlyPlayed } = this.props;
     const formattedSongTitle = formatSongTitle(song);
+    const songSrc = playlist[0].url;
     // if (this.shouldRenderAudioPlayer()) {
       return (
         <div className="relative">
@@ -196,7 +197,9 @@ class SingleSong extends Component {
           <div className="clearfix favorite-download" onClick={ stopChildClickPropagation }>
             <i className={ this.renderFavoritesCSS(formattedSongTitle) }
                onClick={ () => toggleAddRemoveFavorites(formattedSongTitle)}></i>
-            <i className="download fas fa-download"></i>
+            <a href={songSrc}> 
+              <i className="download fas fa-download"></i>
+            </a>
           </div>
         </div>
       )
