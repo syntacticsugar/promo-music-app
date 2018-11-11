@@ -153,11 +153,18 @@ class App extends Component {
 class Header extends Component {
   render = () => {
     return (
-      <div className="App">
+      <div className="App clearfix">
         <header className="App-header">
           <div className="logo"></div>
           <h1 className="App-title">For Promotional Use Only</h1>
           <div className='slogan'>Classic Rave Music from the 90s and Beyond</div>
+          <div className="social-media">
+            <ul>
+              <li>F</li>
+              <li>F</li>
+              <li>F</li>
+            </ul>
+          </div>
         </header>
       </div>
     );
