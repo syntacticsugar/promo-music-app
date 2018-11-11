@@ -160,9 +160,18 @@ class Header extends Component {
           <div className='slogan'>Classic Rave Music from the 90s and Beyond</div>
           <div className="social-media">
             <ul>
-              <li>F</li>
-              <li>F</li>
-              <li>F</li>
+              <li>
+                <a href=""><i className="fab fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="" ><i className="fab fa-facebook"></i></a>
+              </li>
+              <li>
+                <a href="" ><i className="fas fa-share-square"></i></a>
+              </li>
+              <li>
+                <a href="" ><i className="far fa-envelope"></i></a>
+              </li>
             </ul>
           </div>
         </header>
