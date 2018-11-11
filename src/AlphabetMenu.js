@@ -23,6 +23,7 @@ class AlphabetMenu extends Component {
     )
   }
   render = () => {
+    const {activeLetter, selectLetter} = this.props
     return (
       <React.Fragment>
         <div className="header-wrapper">
@@ -33,6 +34,14 @@ class AlphabetMenu extends Component {
 
               <div className="horizontal-scroller">
                 <ul>
+                {/*
+                  <li
+                    key={"NUM"}
+                    onClick={ ()=>selectLetter("NUM")}
+                    className={this.activeLetterClass("NUM")}
+                    >#</li>
+                  */}
+
                   { alphabetConst.map((letter) => this.createLetter(letter) ) }
                 </ul>
               </div>
